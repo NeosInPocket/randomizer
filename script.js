@@ -1,21 +1,63 @@
 let generateBtn = document.getElementById("generate");
+let items =
+    [
+        [16, 18, 6, 25, 12, 1, 18, 9, 19, 27], //1
+        [5, 18, 21, 15, 4, 25, 26, 17, 16, 1], //2
+        [20, 28, 25, 10, 16, 6, 21, 8, 1, 24], //3
+        [22, 13, 25, 7, 26, 17, 6, 24, 28, 4],  //4
+        [12, 17, 21, 3, 18, 26, 15, 19, 14, 24], //5
+        [20, 11, 1, 27, 22, 17, 10, 9, 16, 3],  //6
+        [11, 21, 9, 2, 20, 6, 30, 17, 15, 29],  //7
+        [9, 15, 26, 24, 13, 30, 14, 5, 11, 29], //8
+        [6, 23, 27, 21, 16, 1, 15, 17, 2, 3],   //9
+        [12, 26, 14, 28, 16, 27, 4, 15, 2, 10], //10
+        [6, 22, 13, 7, 30, 24, 2, 17, 27, 10],  //11
+        [5, 26, 2, 12, 9, 23, 29, 3, 16, 11],   //12
+        [26, 1, 6, 5, 29, 7, 16, 14, 28, 20],   //13
+        [5, 4, 24, 17, 15, 6, 16, 30, 1, 27],   //14
+        [26, 23, 12, 22, 9, 19, 13, 2, 11, 24], //15
+        [23, 12, 29, 3, 1, 24, 16, 10, 15, 18], //16
+        [9, 25, 8, 12, 18, 6, 14, 22, 27, 20],  //17
+        [4, 16, 25, 29, 20, 21, 3, 28, 2, 13],  //18
+        [25, 28, 27, 8, 19, 6, 20, 18, 14, 10], //19
+        [26, 19, 25, 5, 6, 24, 1, 30, 20, 23],  //20
+        [16, 15, 6, 24, 10, 1, 18, 8, 19, 27],  //21
+        [16, 7, 14, 3, 8, 25, 22, 9, 29, 13],   //22
+        [12, 8, 13, 29, 5, 11, 21, 1, 6, 15]    //23
+    ]
+
+let mainIndex = 0;
+let index = 0;
 
 function randomNum()
 {
-    let min = document.getElementById("min");
-    let max = document.getElementById("max");
-    let minValue = Number(min.value);
-    let maxValue = Number(max.value);
-    if (minValue > maxValue)
+    let num = 0;
+
+    if (mainIndex > items.length - 1)
     {
-        minValue = maxValue + minValue;
-        maxValue = minValue - maxValue;
-        minValue = minValue - maxValue;
-        min.value = minValue;
-        max.value = maxValue;
+        num = Math.floor(Math.random() * 30) + 1;
+        document.getElementById("result").innerText = num;
+        return;
     }
-    let num = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
+    else
+    {
+        num = items[mainIndex][index];
+    }
+
     document.getElementById("result").innerText = num;
+
+    if (index == 9)
+    {
+        mainIndex++;
+        index = 0;
+    }
+    else
+    {
+        index++;
+    }
+
+    console.log(mainIndex);
+    console.log(index);
 }
-window.addEventListener("load", randomNum());
+
 generateBtn.addEventListener("click", randomNum);
